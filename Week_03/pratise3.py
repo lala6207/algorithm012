@@ -55,6 +55,22 @@ class SolutionTest2(object):
     """
     def permute(self, nums):
         """
-        :type nums: List[int]
-        :rtype: List[List[int]]
+        给定一个 没有重复 数字的序列，返回其所有可能的全排列。
         """
+        def trace_back(nums, path):
+            if len(path) == len(nums):
+                import copy
+                d = copy.deepcopy(path)
+                res.append(d)
+                return
+            for num in nums:
+                if num in path:
+                    continue
+                path.append(num)
+                trace_back(nums, path)
+                path.remove(num)
+
+        res = []
+        path = []
+        trace_back(nums, path)
+        return res
